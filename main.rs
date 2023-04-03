@@ -1,23 +1,15 @@
+use druid::{WindowDesc, AppLauncher};
+mod ui;
+use ui::ui_builder;
 
-use std::io;
 
 fn main() {
-    let a = [1, 2, 3, 4, 5];
+    let main_window = WindowDesc::new(ui_builder())
+    .window_size((400.0,400.0))
+    .title("My TODO APP");
 
-    println!("Please enter an array index.");
+    AppLauncher::with_window(main_window)
+    .launch(0)
+    .expect("not working")
 
-    let mut index = String::new();
-
-    io::stdin()
-        .read_line(&mut index)
-        .expect("Failed to read line");
-
-    let index: usize = index
-        .trim()
-        .parse()
-        .expect("Index entered was not a number");
-
-    let element = a[index];
-
-    println!("The value of the element at index {index} is: {element}");
 }
